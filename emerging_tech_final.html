@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerging Business Technologies – Ju Lee</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #060a0f;
+    --surface: #0d1520;
+    --border: rgba(0,230,180,0.18);
+    --accent: #00e6b4;
+    --accent2: #0af;
+    --accent3: #7b5cff;
+    --text: #e8f4f0;
+    --muted: #6a8a80;
+    --mono: 'Space Mono', monospace;
+    --display: 'Syne', sans-serif;
+  }
+
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--display); overflow-x: hidden; scroll-behavior: smooth; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,230,180,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,230,180,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+    pointer-events: none;
+  }
+
+  .site { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 60px 24px 80px;
+    text-align: center;
+    position: relative;
+  }
+
+  .glitch-ring {
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 60px rgba(0,230,180,0.12), inset 0 0 60px rgba(0,230,180,0.06);
+    animation: pulse-ring 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .glitch-ring.r2 { width: 560px; height: 560px; border-color: var(--accent3); animation-delay: 1.8s; opacity: 0.35; }
+
+  @keyframes pulse-ring {
+    0%,100% { opacity:0.3; transform:scale(1); }
+    50% { opacity:0.85; transform:scale(1.04); }
+  }
+
+  .hero-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); background: rgba(0,230,180,0.08); border: 1px solid rgba(0,230,180,0.3);
+    padding: 5px 16px; border-radius: 2px; margin-bottom: 32px;
+    animation: fadein 0.6s ease both; position: relative; z-index: 1;
+  }
+
+  h1 {
+    font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 6.5vw, 4.4rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 70%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: fadein 0.7s ease 0.1s both; position: relative; z-index: 1;
+  }
+
+  .byline {
+    margin-top: 18px; font-family: var(--mono); font-size: 13px; color: var(--muted);
+    letter-spacing: 0.1em; animation: fadein 0.7s ease 0.2s both; position: relative; z-index: 1;
+  }
+  .byline span { color: var(--accent); }
+
+  .hero-desc {
+    margin-top: 16px; max-width: 500px; font-size: 14px; line-height: 1.75; color: #7aa098;
+    animation: fadein 0.7s ease 0.3s both; position: relative; z-index: 1;
+  }
+
+  .scroll-cta {
+    margin-top: 44px; animation: fadein 0.7s ease 0.5s both;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
+    position: relative; z-index: 1; background: none; border: none;
+  }
+  .scroll-cta .arrow { font-size: 20px; color: var(--accent); animation: bounce 1.7s ease-in-out infinite; }
+
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  @keyframes fadein { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(6,10,15,0.88); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 36px; gap: 16px; flex-wrap: wrap;
+  }
+
+  .nav-logo { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.2em; padding: 16px 0; white-space: nowrap; }
+
+  .nav-tabs { display: flex; gap: 0; }
+
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); padding: 18px 18px; position: relative; transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent); transform: scaleX(0); transition: transform 0.25s;
+    transform-origin: left;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  /* ── CONTENT ── */
+  .content { max-width: 840px; margin: 0 auto; padding: 64px 28px 120px; }
+
+  .essay-panel { display: none; animation: panelin 0.4s ease both; }
+  .essay-panel.active { display: block; }
+
+  @keyframes panelin { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+  .essay-header { margin-bottom: 44px; }
+  .q-num { font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 12px; }
+
+  .essay-title {
+    font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+    line-height: 1.1; letter-spacing: -0.01em;
+    background: linear-gradient(120deg, #fff 45%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .essay-divider {
+    margin: 22px 0 0; height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3), transparent);
+  }
+
+  .essay-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 36px; }
+  .tag {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 11px; border: 1px solid var(--border); border-radius: 2px; color: var(--muted);
+  }
+
+  .essay-body { font-size: 15px; line-height: 1.9; color: #a8c4bc; }
+  .essay-body p { margin-bottom: 22px; }
+
+  .essay-body h3 {
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+    margin: 40px 0 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .essay-body h3::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .callout {
+    border-left: 2px solid var(--accent3); padding: 16px 22px;
+    background: rgba(123,92,255,0.07); border-radius: 0 4px 4px 0;
+    margin: 28px 0 32px; font-size: 14px; line-height: 1.7; color: #b8cccc;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="site">
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="glitch-ring"></div>
+    <div class="glitch-ring r2"></div>
+    <div class="hero-label">Villanova University &nbsp;·&nbsp; Spring 2026</div>
+    <h1>Emerging Business<br>Technologies</h1>
+    <p class="byline">Final Project &nbsp;·&nbsp; <span>Ju Lee</span></p>
+    <p class="hero-desc">Three essays exploring the technologies reshaping how we compute, connect, and compete — from AI orchestration to cloud infrastructure to the future of cybersecurity.</p>
+    <button class="scroll-cta" onclick="document.querySelector('nav').scrollIntoView({behavior:'smooth'})">
+      Explore Essays
+      <span class="arrow">↓</span>
+    </button>
+  </section>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">JU LEE &nbsp;·&nbsp; EBT FINAL</div>
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="show('ai', this)">01 · AI Maestro</button>
+      <button class="tab-btn" onclick="show('security', this)">02 · Security & Privacy</button>
+      <button class="tab-btn" onclick="show('cloud', this)">03 · The Cloud</button>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ESSAY 1: AI -->
+    <div class="essay-panel active" id="panel-ai">
+      <div class="essay-header">
+        <div class="q-num">Question 01 of 03</div>
+        <h2 class="essay-title">Will AI Become the Maestro<br>of Emerging Technology?</h2>
+        <div class="essay-divider"></div>
+      </div>
+      <div class="essay-tags">
+        <span class="tag">Artificial Intelligence</span>
+        <span class="tag">Automation</span>
+        <span class="tag">IoT</span>
+        <span class="tag">Smart Cities</span>
+        <span class="tag">Ethics</span>
+      </div>
+      <div class="essay-body">
+        <h3>Introduction</h3>
+        <p>Artificial intelligence is rapidly evolving from a specialized tool into a central coordinating force across emerging technologies. Rather than simply being another innovation, AI is increasingly functioning as the "maestro" that orchestrates how technologies interact, adapt, and create value. While it may not fully control every system, its role as an integrator and decision-maker is becoming undeniable.</p>
+
+        <h3>AI as an Amplifier</h3>
+        <p>AI enhances other technologies by enabling automation and intelligence at scale. In healthcare, AI powers diagnostic tools that analyze medical images faster and sometimes more accurately than human doctors. In transportation, AI is the foundation of autonomous vehicles, coordinating real-time decisions based on sensor data. In finance, AI drives fraud detection systems and algorithmic trading. These examples demonstrate that AI is not replacing technologies — it is amplifying their capabilities.</p>
+
+        <div class="callout">
+          In smart cities, AI integrates traffic systems, energy grids, and public services into a single intelligent layer — acting as the coordinating force across otherwise siloed infrastructure.
+        </div>
+
+        <h3>The Unifying Layer</h3>
+        <p>AI acts as a unifying layer across systems. Technologies like the Internet of Things (IoT), cloud computing, and robotics generate massive amounts of data. Without AI, much of this data would remain underutilized. AI systems process, interpret, and act on this data, allowing different technologies to work together seamlessly — optimizing efficiency and sustainability in ways no single technology could alone.</p>
+
+        <h3>Risks and Responsibility</h3>
+        <p>The idea of AI as a "maestro" raises legitimate concerns. Over-reliance on AI could lead to reduced human oversight and accountability. Bias in AI algorithms can amplify inequality if not carefully managed. Additionally, concentration of AI power among a few large companies may create dangerous imbalances in technological control — with significant implications for access, fairness, and democracy.</p>
+
+        <h3>Conclusion</h3>
+        <p>AI is increasingly becoming the central coordinating force in emerging technology ecosystems. While it may not fully control every innovation, its ability to enhance, integrate, and optimize systems positions it as the closest thing to a technological maestro. The challenge moving forward is ensuring that this power is used responsibly, inclusively, and with meaningful human oversight at every layer.</p>
+      </div>
+    </div>
+
+    <!-- ESSAY 2: SECURITY -->
+    <div class="essay-panel" id="panel-security">
+      <div class="essay-header">
+        <div class="q-num">Question 02 of 03</div>
+        <h2 class="essay-title">Will Security and Privacy Become<br>a New Computing Priority?</h2>
+        <div class="essay-divider"></div>
+      </div>
+      <div class="essay-tags">
+        <span class="tag">Cybersecurity</span>
+        <span class="tag">Data Privacy</span>
+        <span class="tag">Zero Trust</span>
+        <span class="tag">Regulation</span>
+        <span class="tag">Privacy by Design</span>
+      </div>
+      <div class="essay-body">
+        <h3>Introduction</h3>
+        <p>Security and privacy are no longer optional features in computing — they are quickly becoming fundamental priorities. As digital systems expand into every aspect of daily life, the risks associated with data breaches, surveillance, and cyberattacks have grown significantly. This shift is forcing companies, governments, and individuals to rethink how technology is designed and deployed.</p>
+
+        <h3>The Data Explosion</h3>
+        <p>One major driver of this shift is the explosion of data. Modern technologies such as AI, IoT devices, and mobile applications continuously collect personal and behavioral data — from location tracking to biometric information. As the volume and sensitivity of data increase, so does the potential harm if that data is compromised. High-profile data breaches have demonstrated how vulnerable even the largest systems can be, making security a top concern for organizations worldwide.</p>
+
+        <div class="callout">
+          Privacy is no longer just a legal checkbox — it has become a brand differentiator. Consumers increasingly choose platforms they trust, and companies that prioritize transparency are gaining a measurable competitive edge.
+        </div>
+
+        <h3>Privacy as Competitive Advantage</h3>
+        <p>Privacy has become a competitive advantage. Consumers are increasingly aware of how their data is used and are more likely to trust companies that prioritize transparency and protection. Regulations such as data protection laws have also forced companies to adopt stricter security measures. As a result, businesses are integrating privacy into their systems from the start — rather than treating it as an afterthought.</p>
+
+        <h3>New Challenges from Emerging Technologies</h3>
+        <p>Emerging technologies introduce new and complex challenges. AI systems require large datasets, which can conflict directly with privacy goals. Cloud computing centralizes data storage, making it a high-value target for cyberattacks. Balancing innovation with security is therefore one of the defining challenges of modern computing — requiring careful tradeoffs at every stage of design.</p>
+
+        <h3>Conclusion</h3>
+        <p>Security and privacy are evolving into foundational priorities in computing. Concepts like "zero trust architecture" and "privacy by design" reflect this shift — organizations are proactively building systems that minimize risk from the ground up rather than patching vulnerabilities after the fact. As technology becomes more integrated into daily life, protecting data is no longer optional. It is essential for trust, functionality, and long-term sustainability.</p>
+      </div>
+    </div>
+
+    <!-- ESSAY 3: CLOUD -->
+    <div class="essay-panel" id="panel-cloud">
+      <div class="essay-header">
+        <div class="q-num">Question 03 of 03</div>
+        <h2 class="essay-title">Will Everything End Up in the Cloud?<br>Is This Good or Bad?</h2>
+        <div class="essay-divider"></div>
+      </div>
+      <div class="essay-tags">
+        <span class="tag">Cloud Computing</span>
+        <span class="tag">Edge Computing</span>
+        <span class="tag">Infrastructure</span>
+        <span class="tag">Scalability</span>
+        <span class="tag">Sustainability</span>
+      </div>
+      <div class="essay-body">
+        <h3>Introduction</h3>
+        <p>Cloud computing has transformed how data is stored, processed, and accessed — leading many to ask whether everything will eventually move to the cloud. While the trend toward cloud adoption is strong and growing, the future is more likely to involve a hybrid model rather than complete centralization. Whether this shift is good or bad ultimately depends on how its benefits and risks are managed.</p>
+
+        <h3>The Case for Cloud</h3>
+        <p>One of the main advantages of cloud computing is efficiency. The cloud allows companies to scale resources on demand, reducing the need for expensive physical infrastructure. It also enables global access, allowing users to retrieve data and applications from anywhere with an internet connection. This flexibility has been critical for remote work, digital collaboration, and the rapid pace of modern innovation.</p>
+
+        <div class="callout">
+          Not everything can or should be cloud-based. Real-time systems — like autonomous vehicles or industrial robots — require edge computing, where data is processed at the source to eliminate the latency the cloud simply cannot afford.
+        </div>
+
+        <h3>The Edge Computing Counter</h3>
+        <p>Not everything can or should be moved to the cloud. Certain applications require real-time processing with minimal latency — autonomous vehicles, industrial automation systems, and medical devices among them. In these cases, edge computing — processing data closer to where it is generated — offers a more practical and safe solution. This suggests that the future will involve a combination of cloud and edge systems, rather than a wholesale migration to one model.</p>
+
+        <h3>Risks and Concerns</h3>
+        <p>Centralizing data in large data centers increases the risk of large-scale cyberattacks — a single breach can expose millions of users simultaneously. Dependence on cloud providers also creates issues related to control, reliability, and cost. If a major cloud service experiences downtime, it can disrupt thousands of businesses at once. Vendor lock-in and rising subscription costs are growing concerns for organizations of all sizes.</p>
+
+        <h3>Conclusion</h3>
+        <p>While cloud computing will continue to dominate the digital landscape, not everything will end up in the cloud. A hybrid approach — combining cloud and edge computing — is both more realistic and more resilient. The impact of this shift is simultaneously positive and negative, offering efficiency and scalability while introducing new risks related to security and systemic dependence. The key is thoughtful governance and intentional design, not uncritical adoption.</p>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /site -->
+
+<script>
+  function show(key, btn) {
+    document.querySelectorAll('.essay-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + key).classList.add('active');
+    btn.classList.add('active');
+    document.querySelector('.content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
